@@ -17,12 +17,50 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+          <form action="kelola_survei/tambah" method="post">
+            <div class="form-group">
+              <label for="namaSurvei">Nama Survei</label>
+              <input type="text" class="form-control" name="nama_survei" placeholder="Masukkan nama survei">
+            </div>
+            <div class="form-group">
+              <label for="deskripsi">Deskripsi</label>
+              <input type="text" class="form-control" nama="deskripsi" placeholder="Masukkan deskripsi survei">
+            </div>
+            <hr>
+            <div id="parentPertanyaan">
+              <!-- <div id="geolocation">
+                <div class="form-row mb-2">
+                  <div class="col-8">
+                    <input type="text" class="form-control" name="pertanyaan[][nama]" placeholder="Geolocation">
+                  </div>
+                </div>
+              </div> -->
+              <div id="pertanyaan">
+                <div class="form-row mb-2">
+                  <div class="col-8">
+                    <input type="text" class="form-control" name="param[pertanyaan][0][nama]" placeholder="Masukkan pertanyaan">
+                  </div>
+                  <div class="col">
+                    <select class="form-control" name="param[pertanyaan][0][tipe]" onchange="selectTipe(this)">
+                      <option value="short">Jawaban Singkat</option>
+                      <option value="long">Paragraf</option>
+                      <option value="radio">Pilihan Ganda</option>
+                      <option value="check">Kotak Centang</option>
+                      <option value="select">Drop-down</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="parentOpsi"></div>
+              </div>
+            </div>
+            <hr>
+            <button type="button" class="btn btn-primary" onclick="tambahPertanyaan(this)">Tambah Pertanyaan</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

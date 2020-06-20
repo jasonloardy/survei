@@ -21,6 +21,12 @@ class Kelola_survei extends CI_Controller {
     $this->load->view('pages/kelola_survei', $data);
 	}
 
+  public function tambah()
+  {
+    $param = $_POST['param'];
+    echo count($param['pertanyaan']);
+  }
+
   public function json_all()
   {
     $all_survei = $this->kelola_survei_model->all_survei();
