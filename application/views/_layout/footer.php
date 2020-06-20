@@ -56,6 +56,9 @@
 <script src="<?= base_url() ?>assets/template/sb-admin-2/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
+<script>
+  $("#accordionSidebar").addClass("toggled");
+</script>
 <script src="<?= base_url() ?>assets/js/kelola_survei.js"></script>
 
 </body>

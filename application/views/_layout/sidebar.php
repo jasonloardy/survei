@@ -19,11 +19,10 @@
 
       <?php
         $segment = $this->uri->segment(1);
-        $class = "active";
       ?>
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item <?= ($segment == 'dashboard') ? $class : '' ?>">
+      <li class="nav-item <?= ($segment == 'dashboard') ? 'active' : '' ?>">
         <a class="nav-link" href="/dashboard">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -58,14 +57,14 @@
       </li> -->
 
       <!-- Nav Item - Charts -->
-      <li class="nav-item <?= ($segment == 'kelola_survei') ? $class : '' ?>">
+      <li class="nav-item <?= ($segment == 'kelola_survei') ? 'active' : '' ?>">
         <a class="nav-link" href="/kelola_survei">
           <i class="fas fa-fw fa-table"></i>
           <span>Kelola Data Survei</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item <?= ($segment == 'hasil_survei') ? $class : '' ?>">
+      <li class="nav-item <?= ($segment == 'hasil_survei') ? 'active' : '' ?>">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Lihat Respon Survei</span></a>

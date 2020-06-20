@@ -23,8 +23,16 @@ class Kelola_survei extends CI_Controller {
 
   public function tambah()
   {
-    $param = $_POST['param'];
-    echo count($param['pertanyaan']);
+    if (isset($_POST['submit'])) {
+      $params = $_POST['param'];
+      // echo json_encode($params);
+
+      $insertSurvei = $this->kelola_survei_model->insert_survei($params);
+      if ($insertSurvei) {
+        $this->session->set_flashdata('msgInsertSurveiOk', 'Data Survei berhasil ditambahkan!');
+      }
+      redirect('/kelola_survei', 'refresh');
+    }
   }
 
   public function json_all()

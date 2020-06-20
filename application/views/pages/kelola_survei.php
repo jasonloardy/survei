@@ -20,11 +20,11 @@
           <form action="kelola_survei/tambah" method="post">
             <div class="form-group">
               <label for="namaSurvei">Nama Survei</label>
-              <input type="text" class="form-control" name="nama_survei" placeholder="Masukkan nama survei">
+              <input type="text" class="form-control" name="param[nama_survei]" placeholder="Masukkan nama survei">
             </div>
             <div class="form-group">
               <label for="deskripsi">Deskripsi</label>
-              <input type="text" class="form-control" nama="deskripsi" placeholder="Masukkan deskripsi survei">
+              <input type="text" class="form-control" name="param[deskripsi]" placeholder="Masukkan deskripsi survei">
             </div>
             <hr>
             <div id="parentPertanyaan">
@@ -58,7 +58,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary" name="submit">Save changes</button>
           </div>
         </form>
       </div>
@@ -71,6 +71,15 @@
     </span>
     <span class="text">Tambah</span>
   </button>
+
+  <?php if ($this->session->flashdata('msgInsertSurveiOk')) { ?>
+  <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+    <strong><?= $this->session->flashdata('msgInsertSurveiOk') ?></strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <?php } ?>
 
   <!-- DataTales Example -->
   <div class="card shadow mb-4 mt-3">
