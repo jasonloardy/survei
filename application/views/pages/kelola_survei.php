@@ -82,6 +82,24 @@
   </div>
   <?php } ?>
 
+  <?php if ($this->session->flashdata('msgHapusSurveiOk')) { ?>
+  <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+    <strong><?= $this->session->flashdata('msgHapusSurveiOk') ?></strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <?php } ?>
+
+  <?php if ($this->session->flashdata('msgHapusSurveiError')) { ?>
+  <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+    <strong><?= $this->session->flashdata('msgHapusSurveiError') ?></strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <?php } ?>
+
   <!-- DataTales Example -->
   <div class="card shadow mb-4 mt-3">
     <div class="card-header py-3">

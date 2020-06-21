@@ -39,4 +39,24 @@ class Kelola_survei_model extends CI_Model {
 		return $this->db->trans_status();
 	}
 
+	public function cek_before_delete($id)
+	{
+		$sql_cek = "SELECT *
+								FROM tb_jawaban tj
+								JOIN tb_pertanyaan tp ON tj.pertanyaan_id = tp.id
+								WHERE tp.survei_id = $id";
+		return $this->db->query($sql_cek)->row();
+	}
+
+	public function delete_survei($id)
+	{
+		$sql_delete = "DELETE ts, tp, tpo
+										FROM tb_survei ts
+										LEFT JOIN tb_pertanyaan tp ON ts.id = tp.survei_id
+										LEFT JOIN tb_pertanyaan_opsi tpo ON tp.id = tpo.pertanyaan_id
+										WHERE ts.id = $id";
+		$this->db->query($sql_delete);
+		return $this->db->affected_rows() > 0;
+	}
+
 }

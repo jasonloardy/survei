@@ -56,4 +56,20 @@ class Survei extends CI_Controller {
 
     echo json_encode($response);
 	}
+
+  public function submit() {
+    if (isset($_POST['submit'])) {
+      $params = $_POST['param'];
+      // echo json_encode($params);
+
+      $insertJawaban = $this->survei_model->insert_jawaban($params);
+      if ($insertJawaban) {
+        $this->session->set_flashdata('msgInsertJawabanOk', 'Terima kasih, tanggapan anda berhasil tersimpan!');
+      }
+
+      $data = $params;
+
+      $this->load->view('pages/survei_terkirim', $data);
+    }
+  }
 }

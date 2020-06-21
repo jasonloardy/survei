@@ -24,4 +24,30 @@ class Survei_model extends CI_Model {
     return $this->db->query($sql_opsi, array($id))->result();
   }
 
+	public function insert_jawaban($param)
+	{
+		$jawaban = $param['jawaban'];
+
+		$sql_jawaban = "INSERT INTO tb_jawaban (pertanyaan_id, pertanyaan_opsi_id, jawaban_text) VALUES (?, ?, ?)";
+
+		$this->db->trans_start();
+
+		foreach ($jawaban as $j) {
+
+			if (isset($j['text'])) {
+				$this->db->query($sql_jawaban, array($j['pertanyaan_id'], NULL, $j['text']));
+			}
+			elseif (isset($j['opsi'])) {
+				foreach ($j['opsi'] as $opsi) {
+					$this->db->query($sql_jawaban, array($j['pertanyaan_id'], $opsi, NULL));
+				}
+			}
+
+		}
+
+		$this->db->trans_complete();
+
+		return $this->db->trans_status();
+	}
+
 }

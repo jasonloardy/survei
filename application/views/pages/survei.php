@@ -42,13 +42,21 @@
         <div class="card">
           <h5 class="card-header"><?= $nama_survei ?></h5>
           <div class="card-body">
+            <form action="../survei/submit" method="post">
+
+              <input type="hidden" name="param[nama_survei]" value="<?= $nama_survei ?>">
+
             <?= $deskripsi ?>
 
-            <?php foreach ($pertanyaan as $p): ?>
+            <?php
+            $index = 0;
+            foreach ($pertanyaan as $p):
+            ?>
 
               <?php if ($p['tipe'] == 'geo' || $p['tipe'] == 'non') { ?>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="geo" value="<?= $p['tipe'] ?>" readonly>
+                  <input type="hidden" name="param[jawaban][<?= $index ?>][pertanyaan_id]" value="<?= $p['id'] ?>">
+                  <input type="text" class="form-control" id="geo" name="param[jawaban][<?= $index ?>][text]" value="<?= $p['tipe'] ?>" readonly>
                 </div>
 
               <?php } else { ?> <!-- end if -->
@@ -57,14 +65,15 @@
 
               <div class="form-group">
                 <label for="<?= $p['id'] ?>"><?= $p['nama_pertanyaan'] ?></label>
+                <input type="hidden" name="param[jawaban][<?= $index ?>][pertanyaan_id]" value="<?= $p['id'] ?>">
                 <?php if ($p['tipe'] == 'short') { ?>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" name="param[jawaban][<?= $index ?>][text]">
                 <?php } elseif ($p['tipe'] == 'long') { ?>
-                  <textarea class="form-control" rows="3"></textarea>
+                  <textarea class="form-control" rows="3" name="param[jawaban][<?= $index ?>][text]"></textarea>
                 <?php } elseif ($p['tipe'] == 'radio') {
                   foreach ($p['opsi'] as $o) { ?>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadios" id="<?= $o->id ?>" value="<?= $o->id ?>" checked>
+                      <input class="form-check-input" type="radio" name="param[jawaban][<?= $index ?>][opsi][]" id="<?= $o->id ?>" value="<?= $o->id ?>" required>
                       <label class="form-check-label" for="<?= $o->id ?>">
                         <?= $o->nama_opsi ?>
                       </label>
@@ -72,13 +81,13 @@
                 <?php } } elseif ($p['tipe'] == 'check') {
                   foreach ($p['opsi'] as $o) { ?>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="<?= $o->id ?>" id="<?= $o->id ?>">
+                      <input class="form-check-input" type="checkbox" name="param[jawaban][<?= $index ?>][opsi][]" value="<?= $o->id ?>" id="<?= $o->id ?>">
                       <label class="form-check-label" for="<?= $o->id ?>">
                         <?= $o->nama_opsi ?>
                       </label>
                     </div>
                 <?php } } elseif ($p['tipe'] == 'select') { ?>
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <select class="form-control" name="param[jawaban][<?= $index ?>][opsi][]">
                   <?php foreach ($p['opsi'] as $o) { ?>
                         <option value="<?= $o->id ?>"><?= $o->nama_opsi ?></option>
                   <?php } ?>
@@ -89,12 +98,16 @@
 
               <?php } ?>
 
-            <?php endforeach; ?>
+            <?php
+            $index++;
+            endforeach;
+            ?>
 
           </div>
           <div class="card-footer">
             <button type="submit" class="btn btn-primary float-right" name="submit">Submit</button>
           </div>
+        </form>
         </div>
 
 

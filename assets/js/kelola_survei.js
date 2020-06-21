@@ -20,7 +20,7 @@ function tabel_survei() {
                     '</span>' +
                     '<span class="text">Edit</span>' +
                   '</a> ' +
-                  '<a href="#" class="btn btn-danger btn-icon-split btn-sm">' +
+                  '<a href="kelola_survei/hapus/'+data+'" class="btn btn-danger btn-icon-split btn-sm" onclick="return confirm(\'Yakin ingin menghapus Data Survei ini?\')">' +
                     '<span class="icon text-white-50">' +
                       '<i class="fas fa-trash"></i>' +
                     '</span>' +
