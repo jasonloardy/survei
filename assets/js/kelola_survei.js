@@ -32,7 +32,7 @@ function tabel_survei() {
   });
 }
 
-let index = 0;
+let index = 1;
 
 function selectTipe(elem) {
   if (elem.value == 'short' || elem.value == 'long') {
@@ -42,7 +42,7 @@ function selectTipe(elem) {
       $(elem).parent().parent().parent().find("#parentOpsi").append('<div id="opsi">' +
                                                                       '<div class="form-row mb-2">' +
                                                                       '<div class="col-8">' +
-                                                                      '<input type="text" class="form-control" name="param[pertanyaan]['+index+'][opsi][]" placeholder="Masukkan opsi">' +
+                                                                      '<input type="text" class="form-control" name="param[pertanyaan]['+index+'][opsi][]" placeholder="Masukkan opsi" required>' +
                                                                       '</div>' +
                                                                       '</div>' +
                                                                       '</div>' +
@@ -57,10 +57,8 @@ function tambahPertanyaan(elem) {
                                                       '<hr>' +
                                                       '<div class="form-row mb-2">' +
                                                       '<div class="col-8">' +
-                                                      '<input type="text" class="form-control" name="param[pertanyaan]['+index+'][nama]" placeholder="Masukkan pertanyaan">' +
+                                                      '<input type="text" class="form-control" name="param[pertanyaan]['+index+'][nama]" placeholder="Masukkan pertanyaan" required>' +
                                                       '</div>' +
-                                                      // '<div class="col-1">' +
-                                                      // '</div>' +
                                                       '<div class="col">' +
                                                       '<select class="form-control" name="param[pertanyaan]['+index+'][tipe]" onchange="selectTipe(this)">' +
                                                       '<option value="short">Jawaban Singkat</option>' +
@@ -70,7 +68,9 @@ function tambahPertanyaan(elem) {
                                                       '<option value="select">Drop-down</option>' +
                                                       '</select>' +
                                                       '</div>' +
-                                                      '<button type="button" class="btn btn-danger col-1" onclick="hapusPertanyaan(this)">&times;</button>' +
+                                                      '<div class="col-1">' +
+                                                      '<button type="button" class="btn btn-danger btn-block" onclick="hapusPertanyaan(this)">&times;</button>' +
+                                                      '</div>' +
                                                       '</div>' +
                                                       '<div id="parentOpsi"></div>' +
                                                       '</div>');
@@ -78,13 +78,13 @@ function tambahPertanyaan(elem) {
 
 function hapusPertanyaan(elem) {
   index--;
-  $(elem).parent().parent().remove();
+  $(elem).parent().parent().parent().remove();
 }
 
 function tambahOpsi(elem) {
   $(elem).parent().find("#opsi").append('<div class="form-row mb-2">' +
                                          '<div class="col-8">' +
-                                         '<input type="text" class="form-control" name="param[pertanyaan]['+index+'][opsi][]" placeholder="Masukkan opsi">' +
+                                         '<input type="text" class="form-control" name="param[pertanyaan]['+index+'][opsi][]" placeholder="Masukkan opsi" required>' +
                                          '</div>' +
                                          '<div class="col-4">' +
                                          '<button type="button" class="btn btn-primary" onclick="hapusOpsi(this)">&times;</button>' +

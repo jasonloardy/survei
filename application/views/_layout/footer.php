@@ -57,9 +57,25 @@
 
 <!-- Page level custom scripts -->
 <script>
+if ($(window).width() <= 768) {
   $("#accordionSidebar").addClass("toggled");
+}
 </script>
-<script src="<?= base_url() ?>assets/js/kelola_survei.js"></script>
+
+<?php
+  $segment = $this->uri->segment(1);
+
+  switch ($segment) {
+    case 'kelola_survei':
+      echo '<script src="'. base_url() .'assets/js/kelola_survei.js"></script>';
+      break;
+    case 's':
+      echo '<script src="'. base_url() .'assets/js/survei.js"></script>';
+      break;
+    default:
+      break;
+  }
+?>
 
 </body>
 
