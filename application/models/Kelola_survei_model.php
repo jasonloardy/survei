@@ -24,14 +24,17 @@ class Kelola_survei_model extends CI_Model {
 		$survei_id = $this->db->insert_id();
 
 		foreach ($pertanyaan as $p) {
-			$this->db->query($sql_pertanyaan, array($survei_id, $p['nama'], $p['tipe']));
-			$pertanyaan_id = $this->db->insert_id();
+			if ($p['tipe'] <> 'non') {
+				$this->db->query($sql_pertanyaan, array($survei_id, $p['nama'], $p['tipe']));
+				$pertanyaan_id = $this->db->insert_id();
 
-			if (isset($p['opsi'])) {
-				foreach ($p['opsi'] as $o) {
-					$this->db->query($sql_opsi, array($pertanyaan_id, $o));
+				if (isset($p['opsi'])) {
+					foreach ($p['opsi'] as $o) {
+						$this->db->query($sql_opsi, array($pertanyaan_id, $o));
+					}
 				}
 			}
+
 		}
 
 		$this->db->trans_complete();

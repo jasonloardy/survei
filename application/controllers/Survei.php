@@ -13,25 +13,26 @@ class Survei extends CI_Controller {
 	{
     $dataSurvei = $this->survei_model->survei($id);
 
-    $response = $dataSurvei;
+    if ($dataSurvei) {
+      $response = $dataSurvei;
+      $response['pertanyaan'] = array();
 
-    $response['pertanyaan'] = array();
+      $pertanyaan = $this->survei_model->pertanyaan($id);
 
-    $pertanyaan = $this->survei_model->pertanyaan($id);
+      foreach ($pertanyaan as $p) {
+        $p['opsi'] = array();
 
-    foreach ($pertanyaan as $p) {
-      $p['opsi'] = array();
-
-      $pDetail = $this->survei_model->opsi($p['id']);
-      foreach ($pDetail as $pd) {
-          array_push($p['opsi'], $pd);
+        $pDetail = $this->survei_model->opsi($p['id']);
+        foreach ($pDetail as $pd) {
+            array_push($p['opsi'], $pd);
+        }
+        array_push($response['pertanyaan'], $p);
       }
-      array_push($response['pertanyaan'], $p);
+
+      $data = $response;
+
+      $this->load->view('pages/survei', $data);
     }
-
-    $data = $response;
-
-    $this->load->view('pages/survei', $data);
 	}
 
   public function json($id)

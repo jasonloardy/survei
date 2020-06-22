@@ -62,6 +62,8 @@ if ($(window).width() <= 768) {
 }
 </script>
 
+<script src="<?= base_url() ?>assets/js/jquery.validate.min.js"></script>
+
 <?php
   $segment = $this->uri->segment(1);
 
