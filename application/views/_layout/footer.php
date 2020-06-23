@@ -63,6 +63,8 @@ if ($(window).width() <= 768) {
 </script>
 
 <script src="<?= base_url() ?>assets/js/jquery.validate.min.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css' rel='stylesheet' />
 
 <?php
   $segment = $this->uri->segment(1);
@@ -73,6 +75,13 @@ if ($(window).width() <= 768) {
       break;
     case 's':
       echo '<script src="'. base_url() .'assets/js/survei.js"></script>';
+      break;
+    case 'respon_survei':
+      if ($this->uri->segment(2) == 'detail') {
+        echo '<script src="'. base_url() .'assets/js/detail_survei.js"></script>';
+      } else {
+        echo '<script src="'. base_url() .'assets/js/respon_survei.js"></script>';
+      }
       break;
     default:
       break;

@@ -9,8 +9,16 @@ function tabel_survei() {
       "dataSrc" : ""
     },
     "columns" : [
-      { "data" : "id" },
-      { "data" : "nama_survei" },
+      { "data" : "id",
+        "render" : function (data, type, row) {
+          return '<a href="s/'+data+'" target="_blank">'+data+'</a>';
+        }
+      },
+      { "data" : "nama_survei",
+        "render" : function (data, type, row) {
+          return '<a href="s/'+row.id+'" target="_blank">'+data+'</a>';
+        }
+      },
       { "data" : "deskripsi" },
       { "data" : "id",
         "render" : function (data, type, row) {
@@ -25,7 +33,7 @@ function tabel_survei() {
                       '<i class="fas fa-trash"></i>' +
                     '</span>' +
                     '<span class="text">Delete</span>' +
-                  '</a>'
+                  '</a>';
         }
       },
     ]

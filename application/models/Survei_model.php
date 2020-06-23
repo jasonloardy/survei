@@ -28,18 +28,23 @@ class Survei_model extends CI_Model {
 	{
 		$jawaban = $param['jawaban'];
 
-		$sql_jawaban = "INSERT INTO tb_jawaban (pertanyaan_id, pertanyaan_opsi_id, jawaban_text) VALUES (?, ?, ?)";
+		$sql_jawaban = "INSERT INTO tb_jawaban (survei_id, tanggal, geolocation) VALUES (?, ?, ?)";
+		$sql_jawaban_detail = "INSERT INTO tb_jawaban_detail (jawaban_id, pertanyaan_id, pertanyaan_opsi_id, jawaban_text) VALUES (?, ?, ?, ?)";
 
 		$this->db->trans_start();
+
+		$this->db->query($sql_jawaban, array($param['survei_id'], date('Y-m-d H:i:s'), $param['geolocation']));
+
+		$jawaban_id = $this->db->insert_id();
 
 		foreach ($jawaban as $j) {
 
 			if (isset($j['text'])) {
-				$this->db->query($sql_jawaban, array($j['pertanyaan_id'], NULL, $j['text']));
+				$this->db->query($sql_jawaban_detail, array($jawaban_id, $j['pertanyaan_id'], NULL, $j['text']));
 			}
 			elseif (isset($j['opsi'])) {
 				foreach ($j['opsi'] as $opsi) {
-					$this->db->query($sql_jawaban, array($j['pertanyaan_id'], $opsi, NULL));
+					$this->db->query($sql_jawaban_detail, array($jawaban_id, $j['pertanyaan_id'], $opsi, NULL));
 				}
 			}
 

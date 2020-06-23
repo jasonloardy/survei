@@ -28,10 +28,9 @@
             </div>
             <div class="form-group">
               <label for="deskripsi">Geolocation</label>
-              <input type="hidden" name="param[pertanyaan][0][nama]" value="Geolocation">
-              <select class="form-control" name="param[pertanyaan][0][tipe]">
-                <option value="geo">Aktif</option>
-                <option value="non">Tidak Aktif</option>
+              <select class="form-control" name="param[geo]">
+                <option value="1">Aktif</option>
+                <option value="0">Tidak Aktif</option>
               </select>
             </div>
             <hr>
@@ -39,10 +38,10 @@
               <div id="pertanyaan">
                 <div class="form-row mb-2">
                   <div class="col-8">
-                    <input type="text" class="form-control" name="param[pertanyaan][1][nama]" placeholder="Masukkan pertanyaan" required>
+                    <input type="text" class="form-control" name="param[pertanyaan][0][nama]" placeholder="Masukkan pertanyaan" required>
                   </div>
                   <div class="col">
-                    <select class="form-control" name="param[pertanyaan][1][tipe]" onchange="selectTipe(this)">
+                    <select class="form-control" name="param[pertanyaan][0][tipe]" onchange="selectTipe(this)">
                       <option value="short">Jawaban Singkat</option>
                       <option value="long">Paragraf</option>
                       <option value="radio">Pilihan Ganda</option>

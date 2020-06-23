@@ -5,36 +5,40 @@ class Kelola_survei_model extends CI_Model {
 
 	public function all_survei()
 	{
-    return $this->db->get('tb_survei')->result();
+		$sql = "SELECT ts.id, nama_survei, deskripsi,
+						COUNT(tj.id) responden
+						FROM tb_survei ts
+						JOIN tb_jawaban tj ON ts.id = tj.survei_id
+						GROUP BY ts.id";
+
+    return $this->db->query($sql)->result();
 	}
 
 	public function insert_survei($param)
 	{
 		$nama_survei = $param['nama_survei'];
 		$deskripsi = $param['deskripsi'];
+		$geo = $param['geo'];
 		$pertanyaan = $param['pertanyaan'];
 
-		$sql_survei = "INSERT INTO tb_survei (nama_survei, deskripsi) VALUES (?, ?)";
+		$sql_survei = "INSERT INTO tb_survei (nama_survei, deskripsi, geo) VALUES (?, ?, ?)";
 		$sql_pertanyaan = "INSERT INTO tb_pertanyaan (survei_id, nama_pertanyaan, tipe) VALUES (?, ?, ?)";
 		$sql_opsi = "INSERT INTO tb_pertanyaan_opsi (pertanyaan_id, nama_opsi) VALUES (?, ?)";
 
 		$this->db->trans_start();
 
-		$this->db->query($sql_survei, array($nama_survei, $deskripsi));
+		$this->db->query($sql_survei, array($nama_survei, $deskripsi, $geo));
 		$survei_id = $this->db->insert_id();
 
 		foreach ($pertanyaan as $p) {
-			if ($p['tipe'] <> 'non') {
-				$this->db->query($sql_pertanyaan, array($survei_id, $p['nama'], $p['tipe']));
-				$pertanyaan_id = $this->db->insert_id();
+			$this->db->query($sql_pertanyaan, array($survei_id, $p['nama'], $p['tipe']));
+			$pertanyaan_id = $this->db->insert_id();
 
-				if (isset($p['opsi'])) {
-					foreach ($p['opsi'] as $o) {
-						$this->db->query($sql_opsi, array($pertanyaan_id, $o));
-					}
+			if (isset($p['opsi'])) {
+				foreach ($p['opsi'] as $o) {
+					$this->db->query($sql_opsi, array($pertanyaan_id, $o));
 				}
 			}
-
 		}
 
 		$this->db->trans_complete();

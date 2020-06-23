@@ -55,9 +55,19 @@
           <div class="card-body">
             <form id="surveiForm" action="../survei/submit" method="post">
 
+              <input type="hidden" name="param[survei_id]" value="<?= $id ?>">
               <input type="hidden" name="param[nama_survei]" value="<?= $nama_survei ?>">
 
             <?= $deskripsi ?>
+
+            <hr>
+
+            <?php if ($geo == 1) { ?>
+              <div class="form-group">
+                <label for="geo">Geolocation</label>
+                <input type="text" class="form-control" id="geo" name="param[geolocation]" readonly>
+              </div>
+            <?php } ?>
 
             <?php
             $index = 0;
@@ -69,9 +79,7 @@
               <div class="form-group" id="pertanyaan">
                 <label for="<?= $p['id'] ?>"><?= $p['nama_pertanyaan'] ?></label>
                 <input type="hidden" name="param[jawaban][<?= $index ?>][pertanyaan_id]" value="<?= $p['id'] ?>">
-                <?php if ($p['tipe'] == 'geo') { ?>
-                  <input type="text" class="form-control" id="geo" name="param[jawaban][<?= $index ?>][text]" value="<?= $p['tipe'] ?>" readonly>
-                <?php } elseif ($p['tipe'] == 'short') { ?>
+                <?php if ($p['tipe'] == 'short') { ?>
                   <input type="text" class="form-control" name="param[jawaban][<?= $index ?>][text]">
                 <?php } elseif ($p['tipe'] == 'long') { ?>
                   <textarea class="form-control" rows="3" name="param[jawaban][<?= $index ?>][text]"></textarea>

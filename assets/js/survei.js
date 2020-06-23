@@ -41,6 +41,6 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  let geolocation = position.coords.latitude + ', ' + position.coords.longitude;
+  let geolocation = position.coords.longitude + ', ' + position.coords.latitude;
   $("#geo").val(geolocation);
 }
