@@ -1,8 +1,16 @@
 $(document).ready(function() {
-  map_survei();
+  // map_survei();
+  get_geoJson();
 });
 
-function map_survei() {
+function get_geoJson() {
+  $.getJSON(window.location.href.replace("detail", "geojson"))
+    .done(function(data) {
+      map_survei(data);
+    })
+}
+
+function map_survei(geojson) {
   mapboxgl.accessToken = 'pk.eyJ1IjoiamFzb25sb2FyZHkiLCJhIjoiY2ticHkwYTJzMGQyMTJva2F1ZzFubDc2cyJ9.hVSZAbuxC_SDI7sCl2tkyA';
   var map = new mapboxgl.Map({
     container: 'map',
@@ -11,35 +19,10 @@ function map_survei() {
     zoom: 12
   });
 
-
-  var geojson = {
-    type: 'FeatureCollection',
-    features: [{
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: ["119.48851199999999", "-5.1347456000000005"]
-      },
-      properties: {
-        title: 'Mapbox',
-        description: 'Washington, D.C.<br>line2'
-      }
-    },
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-122.414, 37.776]
-      },
-      properties: {
-        title: 'Mapbox',
-        description: 'San Francisco, California'
-      }
-    }]
-  };
-
   // add markers to map
   geojson.features.forEach(function(marker) {
+
+    // console.log(marker);
 
     // create a HTML element for each feature
     var el = document.createElement('div');
@@ -48,8 +31,23 @@ function map_survei() {
     // make a marker for each feature and add to the map
     new mapboxgl.Marker(el)
       .setLngLat(marker.geometry.coordinates)
-      .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-        .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+      // .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+      //   .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
       .addTo(map);
+
+    el.addEventListener('click', function() {
+
+      let description = '';
+
+      $.each( marker.properties.description, function( i, val ) {
+
+        description += '<b>' + val.nama_pertanyaan + '</b><br>' + val.opsi + '<br>';
+
+      })
+
+      $('#bodyModal').html(description);
+      $('#detailSurveiModal').modal('show');
+      // console.log(description);
+    });
   });
 }

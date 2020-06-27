@@ -50,8 +50,7 @@ class Kelola_survei_model extends CI_Model {
 	{
 		$sql_cek = "SELECT *
 								FROM tb_jawaban tj
-								JOIN tb_pertanyaan tp ON tj.pertanyaan_id = tp.id
-								WHERE tp.survei_id = $id";
+								WHERE tj.survei_id = $id";
 		return $this->db->query($sql_cek)->row();
 	}
 

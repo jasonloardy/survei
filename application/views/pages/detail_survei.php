@@ -20,6 +20,27 @@
   }
 </style>
 
+<!-- Modal -->
+<div class="modal fade" id="detailSurveiModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">Informasi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModal">
+          <b>Nama Survei</b><br>Test<br>
+          <b>Penjelasan</b><br>Samsdkamsld askdmalskdm asdkmalskd<br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -33,7 +54,7 @@
       <h6 class="m-0 font-weight-bold text-primary"><?= $nama_survei ?></h6>
     </div>
     <div class="card-body" id="map-container">
-      <div id="map" class="map" style="width:70%; height:600px;"></div>
+      <div id="map" class="map" style="width:100%; height:500px;"></div>
     </div>
   </div>
 
