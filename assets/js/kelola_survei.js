@@ -9,11 +9,7 @@ function tabel_survei() {
       "dataSrc" : ""
     },
     "columns" : [
-      { "data" : "id",
-        "render" : function (data, type, row) {
-          return '<a href="s/'+data+'" target="_blank">'+data+'</a>';
-        }
-      },
+      { "data" : "id" },
       { "data" : "nama_survei",
         "render" : function (data, type, row) {
           return '<a href="s/'+row.id+'" target="_blank">'+data+'</a>';
@@ -22,17 +18,11 @@ function tabel_survei() {
       { "data" : "deskripsi" },
       { "data" : "id",
         "render" : function (data, type, row) {
-          return '<a href="#" class="btn btn-info btn-icon-split btn-sm">' +
-                    '<span class="icon text-white-50">' +
-                      '<i class="fas fa-edit"></i>' +
-                    '</span>' +
-                    '<span class="text">Edit</span>' +
-                  '</a> ' +
-                  '<a href="kelola_survei/hapus/'+data+'" class="btn btn-danger btn-icon-split btn-sm" onclick="return confirm(\'Yakin ingin menghapus Data Survei ini?\')">' +
+          return '<a href="kelola_survei/hapus/'+data+'" class="btn btn-danger btn-icon-split btn-sm" onclick="return confirm(\'Yakin ingin menghapus Data Survei ini?\')">' +
                     '<span class="icon text-white-50">' +
                       '<i class="fas fa-trash"></i>' +
                     '</span>' +
-                    '<span class="text">Delete</span>' +
+                    '<span class="text">Hapus</span>' +
                   '</a>';
         }
       },

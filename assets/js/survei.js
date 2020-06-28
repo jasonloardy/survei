@@ -20,7 +20,7 @@ function rules() {
 $('#surveiForm').validate({
   rules: rules(),
   errorPlacement: function (error, element) {
-    console.log(element[0].classList[0]);
+    // console.log(element[0].classList[0]);
     if (element[0].classList[0] == 'form-control') {
       error.insertAfter(element.parent());
     } else if (element[0].classList[0] == 'form-check-input') {

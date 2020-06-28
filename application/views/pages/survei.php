@@ -60,13 +60,17 @@
 
             <?= $deskripsi ?>
 
-            <hr>
-
             <?php if ($geo == 1) { ?>
+              <hr>
+
               <div class="form-group">
                 <label for="geo">Geolocation</label>
-                <input type="text" class="form-control" id="geo" name="param[geolocation]" readonly>
+                <input type="text" class="form-control" id="geo" name="param[geolocation]" required readonly>
               </div>
+            <?php } else { ?>
+
+              <input type="hidden" class="form-control" name="param[geolocation]" readonly>
+
             <?php } ?>
 
             <?php

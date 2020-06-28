@@ -33,6 +33,10 @@ class Survei_model extends CI_Model {
 
 		$this->db->trans_start();
 
+		if (!$param['geolocation']) {
+			$param['geolocation'] = null;
+		}
+
 		$this->db->query($sql_jawaban, array($param['survei_id'], date('Y-m-d H:i:s'), $param['geolocation']));
 
 		$jawaban_id = $this->db->insert_id();
