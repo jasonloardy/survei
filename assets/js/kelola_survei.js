@@ -40,17 +40,21 @@ function tabel_survei() {
   });
 }
 
-let index = 1;
+let index = 0;
 
 function selectTipe(elem) {
   if (elem.value == 'short' || elem.value == 'long') {
     $(elem).parent().parent().parent().find("#parentOpsi").empty();
   } else {
+    let indexOpsi = $(elem).parent().parent()[0].children[0].innerHTML;
+    indexOpsi = indexOpsi.replace('<input type="text" class="form-control" name="param[pertanyaan][', '');
+    indexOpsi = indexOpsi.replace('][nama]" placeholder="Masukkan pertanyaan" required="">', '');
+    indexOpsi = parseFloat(indexOpsi);
     if ($(elem).parent().parent().parent().find("#parentOpsi").is(':empty')) {
       $(elem).parent().parent().parent().find("#parentOpsi").append('<div id="opsi">' +
                                                                       '<div class="form-row mb-2">' +
                                                                       '<div class="col-8">' +
-                                                                      '<input type="text" class="form-control" name="param[pertanyaan]['+index+'][opsi][]" placeholder="Masukkan opsi" required>' +
+                                                                      '<input type="text" class="form-control" name="param[pertanyaan]['+indexOpsi+'][opsi][]" placeholder="Masukkan opsi" required>' +
                                                                       '</div>' +
                                                                       '</div>' +
                                                                       '</div>' +
@@ -90,15 +94,18 @@ function hapusPertanyaan(elem) {
 }
 
 function tambahOpsi(elem) {
+  let indexOpsi = $(elem).parent().parent()[0].children[1].children[0].innerHTML;
+  indexOpsi = indexOpsi.replace('<input type="text" class="form-control" name="param[pertanyaan][', '');
+  indexOpsi = indexOpsi.replace('][nama]" placeholder="Masukkan pertanyaan" required="">', '');
+  indexOpsi = parseFloat(indexOpsi);
   $(elem).parent().find("#opsi").append('<div class="form-row mb-2">' +
                                          '<div class="col-8">' +
-                                         '<input type="text" class="form-control" name="param[pertanyaan]['+index+'][opsi][]" placeholder="Masukkan opsi" required>' +
+                                         '<input type="text" class="form-control" name="param[pertanyaan]['+indexOpsi+'][opsi][]" placeholder="Masukkan opsi" required>' +
                                          '</div>' +
                                          '<div class="col-4">' +
                                          '<button type="button" class="btn btn-primary" onclick="hapusOpsi(this)">&times;</button>' +
                                          '</div>' +
                                          '</div>');
-  console.log("ok");
 }
 
 function hapusOpsi(elem) {

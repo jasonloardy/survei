@@ -33,9 +33,9 @@
                 <option value="0">Tidak Aktif</option>
               </select>
             </div>
-            <hr>
             <div id="parentPertanyaan">
               <div id="pertanyaan">
+                <hr>
                 <div class="form-row mb-2">
                   <div class="col-8">
                     <input type="text" class="form-control" name="param[pertanyaan][0][nama]" placeholder="Masukkan pertanyaan" required>

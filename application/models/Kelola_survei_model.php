@@ -8,7 +8,7 @@ class Kelola_survei_model extends CI_Model {
 		$sql = "SELECT ts.id, nama_survei, deskripsi,
 						COUNT(tj.id) responden
 						FROM tb_survei ts
-						JOIN tb_jawaban tj ON ts.id = tj.survei_id
+						LEFT JOIN tb_jawaban tj ON ts.id = tj.survei_id
 						GROUP BY ts.id";
 
     return $this->db->query($sql)->result();
